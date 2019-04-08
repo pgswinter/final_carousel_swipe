@@ -23,6 +23,8 @@
   color: #61dafb;
 }
 
+.smooth { transition: transform  calc(var(--f, 1)*.5s) ease-out }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
