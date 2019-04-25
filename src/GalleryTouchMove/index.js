@@ -6,6 +6,7 @@ import {
     styleGalleryUl,
     styleItemGalleryParagraph,
     styleItemGallerySpan,
+    olWrapper,
     styleBullerOl,
 } from './styles';
 
@@ -20,7 +21,10 @@ class Gallery extends React.Component {
             i: 0,
             '--i': 0,
             locked: false,
+            lockedBullet: false,
+            '--tx': 0,
         }
+        this.gallery = React.createRef();
     }
 
     componentDidMount() {
@@ -33,7 +37,7 @@ class Gallery extends React.Component {
             x0: this.unify(e).clientX, //  dragging mouse width
         })
         await this.setState({
-            locked: !this.state.locked
+            locked: !this.state.locked,
         })
     };
 
@@ -95,11 +99,50 @@ class Gallery extends React.Component {
             '--i': index,
         })
     }
+    
+    // drag bullet
+    // lockBullet = async (e) => {
+    //     this.setState({
+    //         x0: this.unify(e).clientX, //  dragging mouse width
+    //     })
+    //     await this.setState({
+    //         lockedBullet: !this.state.lockedBullet
+    //     })
+    // };
+
+    // dragBullet = async (e) => {
+    //     e.preventDefault();
+    //     const widthDevice = this.gallery.current.offsetWidth;
+    //     let distanceDragging = Math.round(this.unify(e).clientX - this.state.x0);
+    //     distanceDragging = distanceDragging > 0 ? 0 : distanceDragging;
+    //     const widthOfOl = dataGallery.length * 110; // 110 is width of bullet img
+    //     // const setDistance = Math.abs(distanceDragging) <= widthOfOl ? distanceDragging : widthOfOl;
+    //     if(widthOfOl > widthDevice) {
+    //         await this.setState({
+    //             '--tx': `${distanceDragging}px`
+    //         })
+    //     }
+    //     console.log(this.state["--tx"])
+    // }
+    // handleBulletMouseDown = (e) => {
+    //     this.lockBullet(e);
+    // };
+
+    // handleBulletTouchStart = (e) => {
+    //     this.lockBullet(e);
+    // };
+    // handleBulletMouseUp = (e) => {
+    //     this.dragBullet(e)
+    // };
+
+    // handleBulletTouchEnd = (e) => {
+    //     this.dragBullet(e)
+    // };
 
     render() {
         const lengthData = dataGallery.length;
         return <React.Fragment>
-            <div className="gallery_wrapper" style={styleGallery}>
+            <div className="gallery_wrapper" style={styleGallery} ref={this.gallery}>
                 <p style={styleItemGalleryParagraph}>
                     <span style={styleItemGallerySpan}>{`${this.state.i+1}/${lengthData}`}</span>
                     公式ギャラリ
@@ -123,13 +166,37 @@ class Gallery extends React.Component {
                         data={dataGallery}
                     />
                 </ul>
-                <ol style={styleBullerOl}>
-                    <NavigationBullet 
-                        data={dataGallery}
-                        activeIndex={this.state.i}
-                        handleBulletClick={this.handleBulletClick}
-                    />
-                </ol>
+                <div
+                    className="olWrapper"
+                    style={{
+                        ...olWrapper,
+                        // ...{
+                        //     '--m': dataGallery.length,
+                        // }
+                    }}
+                >
+                    <ol 
+                        className={`${this.state.lockedBullet && 'smooth'}`}
+                        style={{
+                            ...styleBullerOl,
+                            ...{
+                                '--m': dataGallery.length,
+                            }
+                        }}
+                        // onMouseDown={(e) => this.handleBulletMouseDown(e)}
+                        // onTouchStart={(e) => this.handleBulletTouchStart(e)}
+                        // onTouchMove={(e) => this.handleTouchMove(e)}
+                        // onMouseUp={(e) => this.handleBulletMouseUp(e)}
+                        // onTouchEnd={(e) => this.handleBulletTouchEnd(e)}
+                    >
+                        <NavigationBullet 
+                            data={dataGallery}
+                            activeIndex={this.state.i}
+                            handleBulletClick={this.handleBulletClick}
+                        />
+                    </ol>
+                </div>
+                
             </div>
         </React.Fragment>
     }

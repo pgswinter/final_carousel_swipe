@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Gallery from './Gallery';
+import Gallery from './GalleryTouchMove';
 
 class App extends Component {
   render() {

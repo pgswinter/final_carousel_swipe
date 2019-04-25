@@ -60,15 +60,52 @@ export const smooth = {
     transition: 'transform  calc(var(--f, 1)*.5s) ease-out' 
 }
 
-export const styleBullerOl = {
-    'width': `45vw`,
-    'listStyleType': 'none',
-    paddingLeft: 0,
-    top: 'unset',
+export const olWrapper = {
+    'width': '100vw',
+    'overflowX': 'scroll',
+    'overflowY': 'hidden',
+    'height': '100px',
     bottom: 0,
     position: 'absolute',
     left: '5px',
-    margin: '0'
+}
+
+// export const olWrapper = {
+//     '--m': '1',
+//     '--tx': '0px',
+//     'width': '100%',
+//     'width': 'calc(var(--m)*110px',
+//     'listStyleType': 'none',
+//     bottom: '0',
+//     position: 'absolute',
+//     left: '0',
+//     margin: '0',
+//     'top': 'unset',
+// }
+
+// export const styleBullerOl = {
+//     width: '100vw',
+//     paddingLeft: 0,
+//     'overflowX': 'scroll',
+//     'overflowY': 'hidden',
+//     height: 
+// }
+
+export const styleBullerOl = {
+    '--m': '1',
+    '--tx': '0px',
+    'width': '100%',
+    'width': 'calc(var(--m)*110px',
+    'listStyleType': 'none',
+    paddingLeft: 0,
+    // bottom: 0,
+    // position: 'absolute',
+    // left: '5px',
+    margin: '0',
+    // 'overflowX': 'scroll',
+    // 'overflowY': 'hidden',
+    // transform: 'translate(var(--tx, 0px))',
+    // transition: 'transform .5s ease-out',
 }
 
 export const styleBullet = {
@@ -85,6 +122,7 @@ export const styleBulletImg = {
     'width': '100%',
     'border': '2px solid #0081CC',
     'borderRadius': '4px',
+    'pointerEvents': 'none',
 }
 
 export const styleBulletImgActive = {
